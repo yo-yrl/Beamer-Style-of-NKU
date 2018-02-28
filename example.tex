@@ -14,22 +14,31 @@
 \usepackage{bm}
 \usepackage{nkcolor}
 \usepackage{hyperref}
+\hypersetup{CJKbookmarks=true}
 \usepackage{url}
 \usepackage{amsmath}
 \usepackage{amsthm}
+%\theoremstyle{definition}
+%\newtheorem{theorem}{定理}
+%\newtheorem{definition}{定义}
+%\newtheorem{corollary}{推论}
+%\newtheorem{example}{例}
 \usepackage{booktabs} % for much better looking tables
 \usepackage{cite} % reference
 \usepackage{array} % for better arrays (eg matrices) in maths
-\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+%\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
+%\usepackage{threeparttable}
 \usepackage{cases} %equation set
 \usepackage{multirow} %use table
+\usepackage{enumerate}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{xcolor}
-\usepackage{capt-of}
+%\usepackage{capt-of}
+\setcounter{tocdepth}{1}%只显示section，不显示subsection
 \usepackage{listings}
 \lstset{tabsize=4, keepspaces=true,
     xleftmargin=2em,xrightmargin=0em, aboveskip=1em,
@@ -51,10 +60,8 @@
     escapeinside={/*@}{@*/},
 }
 
-\title[Beamer模板]{Beamer模板：\\
-Style of Nankai University}
-\author[李华]{李华\\
-(\url{lihua@163.com})}
+\title[Beamer模板]{Beamer模板\\Style of Nankai University}
+\author[李华]{李华\\(\url{lihua@163.com})}
 \institute{南开大学XX学院}
 \date{\today}
 
@@ -62,7 +69,6 @@ Style of Nankai University}
 \begin{document}
 %%%%%%%%%% 定理类环境的定义 %%%%%%%%%%
 %% 必须在导入中文环境之后
-\newtheorem{thm}{定理}[section]  % 按 section 编号
 
 \renewcommand{\contentsname}{目录}     % 将Contents改为目录
 \renewcommand{\abstractname}{摘要}     % 将Abstract改为摘要
@@ -71,8 +77,8 @@ Style of Nankai University}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 \renewcommand{\appendixname}{附录}
-\renewcommand{\proofname}{证明}
-\renewcommand{\algorithm}{算法}
+%\renewcommand{\proofname}{证明}
+%\renewcommand{\algorithm}{算法}
 %----------------------------------------------------------------------
 % Title frame
 \begin{frame}[plain]
@@ -81,7 +87,7 @@ Style of Nankai University}
 
 %----------------------------------------------------------------------
 % Outline frame
-% PLEASE RUN pdflatex TWICE 
+
 \begin{frame}
 \frametitle{目录}
 \tableofcontents
@@ -91,9 +97,33 @@ Style of Nankai University}
 \section{框架}
 %----------------------------------------------------------------------
 % Content frame
+
+\subsection{测试功能}
+
+\begin{frame}{枚举}
+    \begin{enumerate}
+        \item No one has done it.
+        \item I need one.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{算法}
+    \begin{algorithm}[H]
+        \caption{背景减除}
+        \begin{algorithmic}[1]
+            \STATE 初始化
+            \REPEAT
+            \STATE 获取第t帧图像
+            \UNTIL{所有帧都被处理}
+        \end{algorithmic}
+    \end{algorithm}
+\end{frame}
+
+\subsection{basic frame}
+
 \begin{frame}
-\frametitle{框架}
-\framesubtitle{Why I made this beamer style}
+\frametitle{框架:Why I made this}
+%\framesubtitle{Why I made this beamer style}
 \begin{block}{Demonstration of the use of items and blocks}
 \begin{itemize}
 \item No one has done it.$$e=mc^2$$
@@ -109,8 +139,9 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
 
 %%=====================================================================
 % Section II
-\section{This is the second section: a two-column slide}
+\section{extend usage}
 %----------------------------------------------------------------------
+\subsection{format}
 \begin{frame}
 \frametitle{A Two-column Slide}
 \begin{columns} 
@@ -132,9 +163,8 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
 \end{columns}
 \end{frame}
 
-% do not use enumerate, use description instead, like this:
 \begin{frame}
-    \frametitle{arg}
+    \frametitle{无序列表}
     \begin{description}
         \item[i] first of all
         \item[ii] besides
@@ -149,53 +179,7 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
     \end{itemize}
 \end{frame}
 
-% 本模板暂时无法对算法提供良好支持，
-% 采用其他方法排版算法
-\begin{frame}[fragile]
-    \begin{table}[!hbp]
-    \centering
-    \begin{tabular}{l}
-    \hline
-    \bf{算法1: Framework} \\
-    \hline
-    {\bfseries Input:} %算法的输入参数：Input   
-    Ensemble of classifiers on former batches, $E_{n-1}$;  \\
-    {\bfseries Output:} %算法的输出：Output  
-    Ensemble of classifiers on the current batch, $E_n$;  \\
-    Extracting the set of reliable positive samples\ $P_n$;   \\
-    \label{ code:fram:extract }%对此行的标记，方便在文中引用算法的某个步骤  
-    $\mathbf{for\ each} i \in [1,9]$ \\
-    \quad initialize a tree $T_{i}$\\  
-    $\mathbf{end\ for}$ \\
-    $\mathbf{return} \quad E_n$; \\ %算法的返回值  
-    \hline
-    \end{tabular}
-    \end{table}
-
-    \begin{comment}
-    \begin{algorithm}[H]
-    \centering     
-    \begin{algorithmic}  
-    \STATE {\bf Input:}  %算法的输入参数：Input   
-    former batches, $E_{n-1}$;  \\
-    \STATE {\bf Output:} %算法的输出：Output  
-    current batch, $E_n$;  \\
-    \STATE my $P_n$;   \\
-    \label{ code:fram:extract }%对此行的标记，方便在文中引用算法的某个步骤  
-    \FOR{each $i \in [1,9]$}  
-    \STATE initialize a tree $T_{i}$ with only a leaf (the root);\  
-    \STATE $T=T \cup T_{i};$\  
-    \ENDFOR 
-    \RETURN $E_n$; %算法的返回值  
-    \end{algorithmic} 
-    \caption{ Framework}   
-    \label{alg2} 
-    \end{algorithm} 
-    \end{comment}
-
-\end{frame}
-
-\begin{frame}
+\begin{frame}{表格}
 \begin{table}[!hbp]
 \centering
 \begin{tabular}{c|c}
@@ -224,7 +208,7 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
 \end{frame}
 
 \begin{frame}
-    \frametitle{theorem and proof in chinese}
+    \frametitle{theorem and proof}
     \begin{theorem}[L\'{e}vy\index{L\'{e}vy 定理}]
     令 $F(x),\varphi(t)$ 分别为随机变量 $X$ 的分布函数和特征函数。
     假定 $F(x)$ 在 $a+h$ 和 $a-h (h>0)$ 处连续，则有
@@ -239,6 +223,8 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
     \end{proof}
 \end{frame}
 
+\subsection{总结与致谢}
+
 \begin{frame}
     \frametitle{reference}
     \begin{thebibliography}{99} 
@@ -249,7 +235,7 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
 \end{frame}
 
 \begin{frame}
-    \Huge{谢谢大家！}\\
+    \centering{\Huge{谢谢大家！}}\\
     \begin{figure}[htb]
 	\includegraphics[width=5cm,height=3cm]{nk_logo.png}
 	\caption{另一个图片示例}
