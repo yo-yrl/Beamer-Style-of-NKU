@@ -1,6 +1,6 @@
 %--------------------------------------------------------
 % NOTE: 1) This is an UNOFFICIAL LaTeX beamer style for 
-%           Beihang University.
+%           Nankai University.
 %       2) This is not exactly a beamer style, rather
 %           it contains two LaTeX files to be inserted 
 %           in the slides' source file.
@@ -47,7 +47,7 @@
 %--------------------------------------------------------
 
 % Layout scheme for outer elements: split header and footer
-\useoutertheme{infolines}
+\useoutertheme{split}
 
 % Color scheme for outer elements: use background colors
 \usecolortheme{whale}
@@ -65,9 +65,21 @@
 \setbeamertemplate{enumerate items}[circle]
 
 % Outline: default, sections numbered, subsections numbered, circle, square, ball, ball unnumbered
-\setbeamertemplate{sections/subsections in toc}[default]
+% symbol in outline
+\setbeamertemplate{sections/subsections in toc}[square]
+
+% list the outline at the beginning of each section
+\AtBeginSection[] % Do nothing for \subsection*
+{
+  \begin{frame}<beamer>
+    \frametitle{目录}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
 
 \setbeamertemplate{caption}[numbered]
+
+\setbeamertemplate{theorems}[numbered]
 
 % General blocks:
 \setbeamertemplate{blocks}[rounded][shadow=true]
@@ -125,7 +137,7 @@
 %\setlength{\titlepageinstitutionheight}{0.95cm}
 
 \setlength{\titlepagespaceundername}{16pt}
-\setlength{\titlepagespaceunderdate}{11pt}
+\setlength{\titlepagespaceunderdate}{5pt}
 
 %--------------------------------------------------------
 
@@ -162,18 +174,6 @@
 \setbeamertemplate{itemize subsubitem}{\scriptsize\raise1.25pt\hbox{\textbullet}}
 
 %-----------------------------------------------------
-% Define frame title drawing
-%-----------------------------------------------------
-\setbeamertemplate{frametitle}
-{%
-  \nointerlineskip
-  \begin{beamercolorbox}[wd=\paperwidth,leftskip=\headingleftmargin]{nkpurple}
-    \vskip1pt%
-    \tikz{\node[minimum height=\headingheight, inner sep=0cm, text width= \headingwidthminusmargins, text badly ragged]{\usebeamerfont{frametitle}\insertframetitle\\\normalsize\it\insertframesubtitle};}
-  \end{beamercolorbox}%
-}
-
-%-----------------------------------------------------
 % Define title page
 %-----------------------------------------------------
 \setbeamertemplate{title page}
@@ -182,24 +182,90 @@
 \includegraphics[width=0.3820\paperwidth]{nk_logo.png}
 \vskip0.2361\titlepageheaderheight
 \end{beamercolorbox}
-\begin{beamercolorbox}[left,leftskip=\headingleftmargin,wd=\paperwidth,ht=\titlepagemaintitleblockheight]{nkpurple}
-\tikz{\node[inner sep=0cm, text width=\paperwidth, minimum height=\titlepagemaintitleblockheight,text badly ragged]{\usebeamerfont{title}\inserttitle};}%
+\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagemaintitleblockheight]{nkpurple}
+  \usebeamerfont{title}\inserttitle
 \end{beamercolorbox}%
 \nointerlineskip%
 \vskip-1pt%
-\begin{beamercolorbox}[left,leftskip=\headingleftmargin,wd=\paperwidth,ht=\titlepagesubtitleblockheight]{nkpurple}
-\tikz{\node[inner sep=0cm, text width=\paperwidth, minimum height=\titlepagesubtitleblockheight, text badly ragged]{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle};}%
+\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagesubtitleblockheight]{nkpurple}
+%\tikz{\node[inner sep=0cm, text width=\paperwidth, minimum height=\titlepagesubtitleblockheight]{
+  \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle
 \end{beamercolorbox}%
 \nointerlineskip%
 \vskip-1pt%
-\begin{beamercolorbox}[left,leftskip=\headingleftmargin,wd=\paperwidth,ht=\titlepagenamedateblockheight]{nkpurple}
+\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagenamedateblockheight]{nkpurple}
       \usebeamerfont{author}\insertauthor\\
-      \vskip\titlepagespaceundername%
+      \vskip\titlepagespaceunderdate%
 	  \usebeamerfont{institute}\insertinstitute\\
 	  \vskip\titlepagespaceunderdate%
       \usebeamerfont{date}\insertdate
       \vskip\titlepagespaceunderdate%
-    \end{beamercolorbox}%
-\begin{beamercolorbox}[left,leftskip=\headingleftmargin,wd=\paperwidth,ht=\titlepagefooterheight]{titlepagefooter}
+\end{beamercolorbox}%
+\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagefooterheight]{titlepagefooter}
 \end{beamercolorbox}
 }
+
+% Footline: AUTHOR | TITLE | DATE FRAMENUMBER
+
+\defbeamertemplate*{footline}{ru theme}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor~~(\insertshortinstitute)
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+  color(0pt)=(frametitle.bg);
+  color(\paperwidth)=(frametitle right.bg)}
+
+\defbeamertemplate*{frametitle}{ru theme}{%
+  \nointerlineskip%
+  %\vskip-2pt%
+  \hbox{\leavevmode
+    \advance\beamer@leftmargin by -12bp%
+    \advance\beamer@rightmargin by -12bp%
+    \beamer@tempdim=\textwidth%
+    \advance\beamer@tempdim by \beamer@leftmargin%
+    \advance\beamer@tempdim by \beamer@rightmargin%
+    \hskip-\Gm@lmargin\hbox{%
+      \setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}%
+          \vbox{}\vskip-.75ex%
+          \leftskip0.3cm%
+          \rightskip0.3cm plus1fil\leavevmode
+          \usebeamerfont*{frametitle}\insertframetitle%
+          \ifx\insertframesubtitle\@empty%
+            \strut\par%
+          \else
+            \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+          \fi%
+          \nointerlineskip
+          \vbox{}%
+          \end{minipage}}%
+      \beamer@tempdim=\ht\beamer@tempbox%
+      \advance\beamer@tempdim by 2pt%
+      \begin{pgfpicture}{0.1mm}{0pt}{1.01\paperwidth}{\beamer@tempdim}
+        \usebeamercolor{frametitle right}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+        \pgfusepath{clip}
+        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+      \end{pgfpicture}
+      \hskip-\paperwidth%
+      \box\beamer@tempbox%
+    }%
+    \hskip-\Gm@rmargin%
+  }%
+%  \nointerlineskip
+%    \vskip-0.2pt
+%    \hbox to\textwidth{\hskip-\Gm@lmargin\pgfuseshading{beamer@topshade}\hskip-\Gm@rmargin}
+%    \vskip-2pt
+}
+\setbeamercolor{frametitle}{bg=white,fg=nkpurple}
