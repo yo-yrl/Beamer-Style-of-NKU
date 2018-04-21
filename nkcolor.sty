@@ -46,14 +46,15 @@
 	{\insertframenumber{}/\inserttotalframenumber}
 %--------------------------------------------------------
 
-% Layout scheme for outer elements: split header and footer
-\useoutertheme{split}
+% Layout scheme for outer elements: split(give ALL section & subsection) or infolines(give CURRENT section & subsection)
+\useoutertheme{infolines}
 
 % Color scheme for outer elements: use background colors
 \usecolortheme{whale}
 
 % Layout scheme for inner elements: rounded elements
-\useinnertheme[shadow]{rounded}
+%\useinnertheme[shadow]{rounded}
+\useinnertheme{rounded}
 
 % Color scheme for inner elements: use foreground colors
 \usecolortheme{orchid}
@@ -129,11 +130,11 @@
 \setlength{\headingheight}{0.1\paperheight}
 \setlength{\footerheight}{0.09017\paperheight}
 
-\setlength{\titlepageheaderheight}{0.2361\paperheight}
+\setlength{\titlepageheaderheight}{0.1761\paperheight}
 \setlength{\titlepagefooterheight}{0.1759\paperheight}
-\setlength{\titlepagemaintitleblockheight}{0.2361\paperheight}
+\setlength{\titlepagemaintitleblockheight}{0.1761\paperheight}
 \setlength{\titlepagesubtitleblockheight}{0.1\paperheight}
-\setlength{\titlepagenamedateblockheight}{0.2361\paperheight}
+\setlength{\titlepagenamedateblockheight}{0.2961\paperheight}
 %\setlength{\titlepageinstitutionheight}{0.95cm}
 
 \setlength{\titlepagespaceundername}{16pt}
@@ -148,10 +149,11 @@
 
 % Define colour names
 \definecolor{nkpurple}{rgb}{0.44140 0.10156 0.37109} %#(113,26,95)
-\setbeamercolor{nkpurple}{bg=nkpurple, fg=white}
+\setbeamercolor{nktitle}{bg=white,fg=nkpurple}
 
 % Set element colours
-\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{title}{bg=white, fg=nkpurple}
+\setbeamercolor{subtitle}{bg=white, fg=nkpurple}
 \setbeamercolor{titlepageheader}{bg=white,fg=black}
 \setbeamercolor{titlepagefooter}{bg=white,fg=black}
 \setbeamercolor{block title}{bg=white, fg=nkpurple}
@@ -162,7 +164,7 @@
 % Set font sizes
 %--------------------------------------------------------
 \setbeamerfont{frametitle}{size=\large,series=\bfseries}
-\setbeamerfont{title}{size=\large,series=\bfseries}
+\setbeamerfont{title}{size=\Large,series=\bfseries}
 \setbeamerfont{author}{size=\normalsize}
 \setbeamerfont{date}{size=\scriptsize}
 \setbeamerfont{subtitle}{size=\footnotesize,series=\bfseries}
@@ -179,21 +181,21 @@
 \setbeamertemplate{title page}
 {%
 \begin{beamercolorbox}[sep=0cm,right,wd=\paperwidth,ht=\titlepageheaderheight,rightskip=\headingleftmargin]{titlepageheader}
-\includegraphics[width=0.3820\paperwidth]{nk_logo.png}
-\vskip0.2361\titlepageheaderheight
+\includegraphics[width=0.2420\paperwidth]{nk_logo.png}
+\vskip0.0361\titlepageheaderheight
 \end{beamercolorbox}
-\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagemaintitleblockheight]{nkpurple}
+\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagemaintitleblockheight]{nktitle}
   \usebeamerfont{title}\inserttitle
 \end{beamercolorbox}%
 \nointerlineskip%
 \vskip-1pt%
-\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagesubtitleblockheight]{nkpurple}
+\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagesubtitleblockheight]{white}
 %\tikz{\node[inner sep=0cm, text width=\paperwidth, minimum height=\titlepagesubtitleblockheight]{
   \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle
 \end{beamercolorbox}%
 \nointerlineskip%
 \vskip-1pt%
-\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagenamedateblockheight]{nkpurple}
+\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagenamedateblockheight]{white}
       \usebeamerfont{author}\insertauthor\\
       \vskip\titlepagespaceunderdate%
 	  \usebeamerfont{institute}\insertinstitute\\
@@ -201,10 +203,11 @@
       \usebeamerfont{date}\insertdate
       \vskip\titlepagespaceunderdate%
 \end{beamercolorbox}%
-\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagefooterheight]{titlepagefooter}
-\end{beamercolorbox}
+%\begin{beamercolorbox}[center,wd=\paperwidth,ht=\titlepagefooterheight]{titlepagefooter}
+%\end{beamercolorbox}
 }
 
+\begin{comment}
 % Footline: AUTHOR | TITLE | DATE FRAMENUMBER
 
 \defbeamertemplate*{footline}{ru theme}{%
@@ -222,6 +225,7 @@
   \end{beamercolorbox}}%
   \vskip0pt%
 }
+\end{comment}
 
 \pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
   color(0pt)=(frametitle.bg);
