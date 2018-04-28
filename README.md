@@ -12,7 +12,7 @@
 3. Complaints or suggestions are always welcome.
 
 **Example**
-
+Attention: In fact, with the commiting of the `nkcolor.sty` style, the pictures below can't show the concrete scape of this style clearly. So just download the PDF to check it.
 ![cover](cover.PNG)
 ![tableofcontents](toc.PNG)
 ![enumerate](enum.PNG)
