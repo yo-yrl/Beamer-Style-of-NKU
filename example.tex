@@ -3,9 +3,10 @@
 \usepackage{fontspec}
 \usepackage{comment}
 \usepackage{xeCJK}
-\setCJKmainfont{KaiTi}
-\setCJKmonofont{KaiTi}
-\setCJKsansfont{Microsoft YaHei}
+%\setsansfont{Microsoft YaHei}
+\setCJKmainfont{Microsoft YaHei}
+%\setCJKmonofont{KaiTi}
+%\setCJKsansfont{Microsoft YaHei}
 \usefonttheme{professionalfonts}
 \usepackage{graphicx}
 \graphicspath{{fig/}} % storage figure in a sub-folder
@@ -60,7 +61,8 @@
     escapeinside={/*@}{@*/},
 }
 
-\title[Beamer模板]{Beamer模板\\Style of Nankai University}
+\title[Beamer模板]{Style of Nankai University}
+\subtitle{Beamer模板}
 \author[李华]{李华\\(\url{lihua@163.com})}
 \institute{南开大学XX学院}
 %\author[Calvin]{Calvin\inst{1} \and Cleven\inst{2}}
@@ -123,7 +125,7 @@
 
 \subsection{basic frame}
 
-\begin{frame}
+\begin{frame}[allowframebreaks]
 \frametitle{框架:Why I made this}
 %\framesubtitle{Why I made this beamer style}
 \begin{block}{Demonstration of the use of items and blocks}
@@ -148,19 +150,15 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
 \frametitle{A Two-column Slide}
 \begin{columns} 
 \begin{column}{0.5\textwidth} 
-\begin{block}{The first column}
 \begin{figure}[htb]
 	\includegraphics[width=2.5cm,height=1.3cm]{nkpurple.png}
 	\caption{插入图片示例}
 	\label{fig1}
     \end{figure}
-\end{block}
 \end{column}
 \begin{column}{0.5\textwidth} 
-\begin{block}{The second column}
 颜色如图\ref{fig1}，以及 e.g. {\color{red}{red}}, {\color{orange}{orange}}, {\color{blue}{blue}}
 \vspace{9.5em}
-\end{block}
 \end{column}
 \end{columns}
 \end{frame}
@@ -201,17 +199,16 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
 \begin{frame}[fragile]
     \frametitle{code highlight}
     \begin{lstlisting}[language=java]
-    public class hello{
-        public static void main(String args[]){
-            System.out.println("hello,world");
-        }
+public class Hello{
+    public static void main(String args[]){
+        System.out.println("hello,world");
     }
-    \end{lstlisting}
+}\end{lstlisting}
 \end{frame}
 
 \begin{frame}
     \frametitle{theorem and proof}
-    \begin{theorem}[L\'{e}vy\index{L\'{e}vy 定理}]
+    \begin{exampleblock}{Theorem 1 (L\'{e}vy)}
     令 $F(x),\varphi(t)$ 分别为随机变量 $X$ 的分布函数和特征函数。
     假定 $F(x)$ 在 $a+h$ 和 $a-h (h>0)$ 处连续，则有
     \begin{align}
@@ -219,10 +216,13 @@ This block appears after a pause. Simply delete the \texttt{\textbackslash pause
     F(a+h)-F(a-h)&=\lim_{T\rightarrow\infty}\frac{1}{\pi}\int^{T}_{-T}\frac{\sin ht}{t}
     e^{-ita}\varphi(t)dt
     \end{align}
-    \end{theorem}
+    \end{exampleblock}
     \begin{proof}
         略。
     \end{proof}
+    \begin{alertblock}
+        Test block!
+    \end{alertblock}
 \end{frame}
 
 \subsection{总结与致谢}
